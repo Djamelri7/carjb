@@ -1,5 +1,5 @@
 {
   "appId": "com.carcare.app",
   "appName": "CarCare",
-  "webDir": "."
+  "webDir": "www"
 }
