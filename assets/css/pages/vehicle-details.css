@@ -1,0 +1,1335 @@
+/* =========================================================
+   CarCare — Vehicle Details Page
+   PHASE 09
+   ========================================================= */
+
+.vehicle-details-page {
+    display: grid;
+    gap: 14px;
+}
+
+/* Top page bar */
+.vehicle-pagebar {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.vehicle-pagebar__back {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 18px;
+}
+
+.vehicle-pagebar__back:hover {
+    background: var(--color-surface-soft);
+}
+
+.vehicle-pagebar__title {
+    flex: 1;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.45px;
+}
+
+.vehicle-pagebar__menu {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 17px;
+}
+
+/* Hero */
+.vehicle-hero {
+    min-height: 230px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 18px;
+    padding: 18px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at 18% 65%, rgba(8,127,245,.09), transparent 36%),
+        linear-gradient(120deg, var(--color-surface-soft), var(--color-surface));
+    box-shadow: var(--shadow-card);
+}
+
+.vehicle-hero__visual {
+    min-width: 0;
+    min-height: 190px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vehicle-hero__visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.22), transparent 55%);
+    pointer-events: none;
+}
+
+.vehicle-hero__image {
+    width: min(100%, 500px);
+    max-height: 205px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .vehicle-hero__image {
+    mix-blend-mode: screen;
+    filter: brightness(.94) contrast(1.05);
+}
+
+.vehicle-hero__info {
+    align-self: center;
+    position: relative;
+    padding: 8px 8px 8px 0;
+}
+
+.vehicle-hero__brand-mark {
+    width: 43px;
+    height: 43px;
+    margin-bottom: 8px;
+    margin-inline-start: auto;
+    display: grid;
+    place-items: center;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.vehicle-hero__model {
+    font-size: 23px;
+    line-height: 1.12;
+    font-weight: 800;
+}
+
+.vehicle-hero__meta {
+    margin-top: 7px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active-badge {
+    width: fit-content;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--color-success);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.vehicle-plate {
+    width: fit-content;
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--color-primary-soft);
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.copy-button {
+    padding: 0;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 14px;
+}
+
+/* Desktop action rail */
+.vehicle-actions {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+}
+
+.vehicle-action {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-surface);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-soft);
+    text-align: start;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.vehicle-action i {
+    width: 22px;
+    text-align: center;
+}
+
+.vehicle-action--active {
+    color: var(--color-primary);
+}
+
+.vehicle-action--delete {
+    color: var(--color-danger);
+    background: var(--color-danger-soft);
+}
+
+/* Technical summary strip */
+.vehicle-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-border);
+    box-shadow: var(--shadow-soft);
+}
+
+.vehicle-summary__item {
+    min-height: 76px;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--color-surface);
+}
+
+.vehicle-summary__icon {
+    color: var(--color-text-secondary);
+    font-size: 23px;
+    text-align: center;
+}
+
+.vehicle-summary__value {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.vehicle-summary__label {
+    display: block;
+    margin-top: 1px;
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Information grid */
+.vehicle-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.vehicle-info-card {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.vehicle-info-card__header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 10px;
+}
+
+.vehicle-info-card__heading {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.vehicle-info-card__heading i {
+    color: var(--color-text-secondary);
+}
+
+.vehicle-info-card__edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.vehicle-fields {
+    display: grid;
+}
+
+.vehicle-field {
+    min-height: 28px;
+    display: grid;
+    grid-template-columns: minmax(75px, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--color-divider);
+    font-size: 12px;
+}
+
+.vehicle-field:last-child {
+    border-bottom: 0;
+}
+
+.vehicle-field__label {
+    color: var(--color-text-secondary);
+}
+
+.vehicle-field__value {
+    min-width: 0;
+    text-align: end;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Odometer / Ownership / Notes */
+.vehicle-secondary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
+
+.odometer-card,
+.ownership-card,
+.notes-card {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.odometer-card__main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.vehicle-big-icon {
+    width: 43px;
+    height: 43px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--color-surface-soft);
+    color: var(--color-text-secondary);
+}
+
+.odometer-value {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.odometer-date {
+    margin-top: 2px;
+    color: var(--color-text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.outline-button {
+    margin-inline-start: auto;
+    padding: 8px 13px;
+    border: 1px solid var(--color-primary);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.vehicle-note {
+    min-height: 72px;
+    padding: 11px;
+    border-radius: 11px;
+    background: var(--color-surface-soft);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+/* Desktop/tablet sidebar-like details layout */
+@media (min-width: 1101px) {
+    .vehicle-details-page {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .vehicle-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vehicle-action {
+        justify-content: center;
+        padding-inline: 10px;
+    }
+
+    .vehicle-info-grid,
+    .vehicle-secondary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .notes-card {
+        grid-column: span 2;
+    }
+}
+
+/* Mobile — reference is a compact stacked card layout */
+@media (max-width: 700px) {
+    .vehicle-details-page {
+        gap: 10px;
+    }
+
+    .vehicle-pagebar {
+        min-height: 34px;
+    }
+
+    .vehicle-pagebar__back,
+    .vehicle-pagebar__menu {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .vehicle-pagebar__title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .vehicle-hero {
+        min-height: 0;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 4px;
+        padding: 8px;
+        border-radius: 14px;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 145px;
+    }
+
+    .vehicle-hero__image {
+        max-height: 145px;
+    }
+
+    .vehicle-hero__info {
+        padding: 4px 5px 4px 2px;
+    }
+
+    .vehicle-hero__brand-mark {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 15px;
+    }
+
+    .vehicle-hero__meta {
+        margin-top: 5px;
+        font-size: 10px;
+    }
+
+    .active-badge {
+        margin-top: 5px;
+        padding: 3px 9px;
+        font-size: 9px;
+    }
+
+    .vehicle-plate {
+        margin-top: 6px;
+        gap: 7px;
+        padding: 4px 7px;
+        font-size: 10px;
+    }
+
+    .copy-button {
+        font-size: 11px;
+    }
+
+    .vehicle-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+    }
+
+    .vehicle-action {
+        min-height: 44px;
+        border-radius: 11px;
+        gap: 6px;
+        padding: 5px;
+        font-size: 9px;
+        justify-content: center;
+    }
+
+    .vehicle-action i {
+        width: auto;
+        font-size: 12px;
+    }
+
+    .vehicle-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border-radius: 13px;
+    }
+
+    .vehicle-summary__item {
+        min-height: 61px;
+        grid-template-columns: 28px 1fr;
+        gap: 7px;
+        padding: 8px;
+    }
+
+    .vehicle-summary__icon {
+        font-size: 18px;
+    }
+
+    .vehicle-summary__value {
+        font-size: 11px;
+    }
+
+    .vehicle-summary__label {
+        font-size: 9px;
+    }
+
+    .vehicle-info-grid,
+    .vehicle-secondary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .vehicle-info-card,
+    .odometer-card,
+    .ownership-card,
+    .notes-card {
+        padding: 12px;
+        border-radius: 13px;
+    }
+
+    .vehicle-info-card__header {
+        margin-bottom: 7px;
+    }
+
+    .vehicle-info-card__heading {
+        font-size: 12px;
+    }
+
+    .vehicle-info-card__edit {
+        font-size: 10px;
+    }
+
+    .vehicle-field {
+        min-height: 26px;
+        font-size: 10px;
+    }
+
+    .notes-card {
+        grid-column: auto;
+    }
+
+    .odometer-value {
+        font-size: 19px;
+    }
+
+    .outline-button {
+        padding: 7px 11px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .vehicle-hero {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 130px;
+    }
+
+    .vehicle-hero__image {
+        max-height: 128px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 14px;
+    }
+
+    .vehicle-summary__item {
+        min-height: 57px;
+    }
+
+    .vehicle-action {
+        font-size: 8px;
+    }
+}
+
+/* =========================================================
+   PHASE 09 — Landscape Tablet Refinement
+   ========================================================= */
+
+/*
+   Landscape tablets must behave like a compact desktop dashboard,
+   not like a stretched portrait phone.
+*/
+@media (min-width: 701px) and (max-width: 1100px) and (orientation: landscape) {
+    .vehicle-details-page {
+        gap: 10px;
+    }
+
+    .vehicle-pagebar {
+        min-height: 34px;
+    }
+
+    .vehicle-pagebar__back,
+    .vehicle-pagebar__menu {
+        width: 34px;
+        height: 34px;
+    }
+
+    .vehicle-pagebar__title {
+        font-size: 19px;
+    }
+
+    /* Hero + actions form the top two-column composition. */
+    .vehicle-hero {
+        min-height: 188px;
+        grid-template-columns: minmax(0, 1fr) 235px;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 164px;
+    }
+
+    .vehicle-hero__image {
+        width: min(100%, 390px);
+        max-height: 164px;
+    }
+
+    .vehicle-hero__info {
+        padding: 5px 8px 5px 0;
+    }
+
+    .vehicle-hero__brand-mark {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 18px;
+    }
+
+    .vehicle-hero__meta {
+        margin-top: 4px;
+        font-size: 10px;
+    }
+
+    .active-badge {
+        margin-top: 5px;
+        padding: 3px 10px;
+        font-size: 9px;
+    }
+
+    .vehicle-plate {
+        margin-top: 6px;
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    /* Actions sit beside the hero, exactly like the reference. */
+    .vehicle-actions {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .vehicle-action {
+        min-height: 50px;
+        justify-content: flex-start;
+        padding: 0 13px;
+        border-radius: 11px;
+        font-size: 11px;
+    }
+
+    .vehicle-action i {
+        width: 18px;
+        font-size: 13px;
+    }
+
+    /*
+       The DOM keeps hero and actions as separate siblings.
+       CSS grid places them together in the first row, then the
+       technical strip spans the full width.
+    */
+    .vehicle-details-page {
+        grid-template-columns: minmax(0, 1fr) 235px;
+    }
+
+    .vehicle-pagebar {
+        grid-column: 1 / -1;
+    }
+
+    .vehicle-hero {
+        grid-column: 1;
+    }
+
+    .vehicle-actions {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: stretch;
+    }
+
+    .vehicle-summary {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .vehicle-summary__item {
+        min-height: 66px;
+        padding: 9px 10px;
+    }
+
+    .vehicle-summary__icon {
+        font-size: 19px;
+    }
+
+    .vehicle-summary__value {
+        font-size: 11px;
+    }
+
+    .vehicle-summary__label {
+        font-size: 9px;
+    }
+
+    /* Three information cards across the landscape screen. */
+    .vehicle-info-grid {
+        grid-column: 1 / -1;
+        grid-row: 4;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .vehicle-info-card {
+        padding: 11px;
+        border-radius: 12px;
+    }
+
+    .vehicle-info-card__header {
+        margin-bottom: 6px;
+    }
+
+    .vehicle-info-card__heading {
+        font-size: 11px;
+    }
+
+    .vehicle-info-card__edit {
+        font-size: 9px;
+    }
+
+    .vehicle-field {
+        min-height: 24px;
+        font-size: 9px;
+        grid-template-columns: minmax(60px, .8fr) minmax(0, 1.2fr);
+    }
+
+    .vehicle-secondary-grid {
+        grid-column: 1 / -1;
+        grid-row: 5;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .odometer-card,
+    .ownership-card,
+    .notes-card {
+        padding: 11px;
+        border-radius: 12px;
+    }
+
+    .odometer-value {
+        font-size: 17px;
+    }
+
+    .outline-button {
+        padding: 6px 10px;
+        font-size: 9px;
+    }
+
+    .vehicle-note {
+        min-height: 57px;
+        padding: 8px;
+        font-size: 9px;
+    }
+}
+
+/* Slightly taller landscape tablets get a little more breathing room. */
+@media (min-width: 701px) and (max-width: 1100px)
+       and (orientation: landscape) and (min-height: 600px) {
+    .vehicle-hero {
+        min-height: 205px;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 180px;
+    }
+
+    .vehicle-hero__image {
+        max-height: 180px;
+    }
+
+    .vehicle-action {
+        min-height: 56px;
+    }
+
+    .vehicle-summary__item {
+        min-height: 72px;
+    }
+
+    .vehicle-field {
+        min-height: 27px;
+    }
+}
+
+/* =========================================================
+   LANDSCAPE REFINEMENT — Vehicle Details Only
+   Portrait + desktop layouts remain unchanged.
+   ========================================================= */
+
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 1100px) {
+    .vehicle-details-page {
+        gap: 12px;
+        padding-bottom: 4px;
+    }
+
+    .vehicle-pagebar {
+        min-height: 38px;
+    }
+
+    .vehicle-pagebar__title {
+        font-size: 20px;
+    }
+
+    /*
+     * Landscape hero:
+     * left = vehicle information
+     * right = actions
+     * This prevents the previous tall stacked layout.
+     */
+    .vehicle-hero {
+        grid-template-columns: minmax(0, 1fr) 255px;
+        min-height: 184px;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 160px;
+    }
+
+    .vehicle-hero__image {
+        width: min(100%, 390px);
+        max-height: 165px;
+    }
+
+    .vehicle-hero__info {
+        padding: 5px 8px 5px 0;
+    }
+
+    .vehicle-hero__brand-mark {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 18px;
+    }
+
+    .vehicle-hero__meta {
+        margin-top: 4px;
+        font-size: 11px;
+    }
+
+    .active-badge {
+        margin-top: 5px;
+        padding: 3px 10px;
+        font-size: 9px;
+    }
+
+    .vehicle-plate {
+        margin-top: 6px;
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    /*
+     * Actions become a compact vertical rail beside the hero.
+     * The action buttons stay identical; only their placement changes.
+     */
+    .vehicle-actions {
+        position: absolute;
+        width: 255px;
+        right: max(22px, calc((100vw - var(--container-width)) / 2 + 22px));
+        top: 78px;
+        grid-template-columns: 1fr;
+        gap: 7px;
+        z-index: 2;
+    }
+
+    .vehicle-hero + .vehicle-actions {
+        /* Reserve the right rail by making the hero itself full width. */
+    }
+
+    .vehicle-action {
+        min-height: 45px;
+        justify-content: flex-start;
+        padding: 0 13px;
+        border-radius: 11px;
+        font-size: 11px;
+    }
+
+    .vehicle-action i {
+        width: 18px;
+        font-size: 13px;
+    }
+
+    /*
+     * The hero must leave visual room for the action rail.
+     * The actual image/information remain on the left.
+     */
+    .vehicle-hero {
+        padding-right: 285px;
+    }
+
+    .vehicle-summary {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .vehicle-summary__item {
+        min-height: 68px;
+        padding: 9px 10px;
+    }
+
+    .vehicle-summary__icon {
+        font-size: 20px;
+    }
+
+    .vehicle-summary__value {
+        font-size: 12px;
+    }
+
+    .vehicle-summary__label {
+        font-size: 9px;
+    }
+
+    /*
+     * Information cards remain horizontal in landscape,
+     * matching the tablet reference instead of becoming one long column.
+     */
+    .vehicle-info-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .vehicle-info-card {
+        padding: 12px;
+        border-radius: 13px;
+    }
+
+    .vehicle-info-card__header {
+        margin-bottom: 7px;
+    }
+
+    .vehicle-info-card__heading {
+        font-size: 11px;
+    }
+
+    .vehicle-info-card__edit {
+        font-size: 9px;
+    }
+
+    .vehicle-field {
+        min-height: 25px;
+        font-size: 9px;
+        grid-template-columns: minmax(60px, .75fr) minmax(0, 1.25fr);
+    }
+
+    .vehicle-secondary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .odometer-card,
+    .ownership-card,
+    .notes-card {
+        padding: 12px;
+        border-radius: 13px;
+    }
+
+    .odometer-value {
+        font-size: 18px;
+    }
+
+    .vehicle-note {
+        min-height: 62px;
+        font-size: 9px;
+    }
+
+    /*
+     * Keep the fixed navigation out of the content and make it compact
+     * without changing its normal portrait appearance.
+     */
+    .app-shell {
+        padding-bottom: 94px;
+    }
+
+    .bottom-nav {
+        min-height: 62px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        padding-block: 3px;
+        border-radius: 22px;
+    }
+
+    .nav-item {
+        height: 54px;
+        font-size: 10px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+
+    .fab-slot {
+        height: 62px;
+    }
+
+    .fab {
+        width: 62px;
+        height: 62px;
+        font-size: 28px;
+    }
+}
+
+/*
+ * Narrow phone landscape.
+ * Uses two columns where possible while keeping touch targets usable.
+ */
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 820px) {
+    .vehicle-hero {
+        grid-template-columns: minmax(0, 1fr) 230px;
+        padding-right: 240px;
+    }
+
+    .vehicle-actions {
+        width: 230px;
+        right: 16px;
+    }
+
+    .vehicle-hero__visual {
+        min-height: 145px;
+    }
+
+    .vehicle-hero__image {
+        max-height: 145px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 16px;
+    }
+
+    .vehicle-summary__item {
+        grid-template-columns: 25px 1fr;
+        gap: 6px;
+    }
+
+    .vehicle-info-grid,
+    .vehicle-secondary-grid {
+        gap: 8px;
+    }
+}
+
+/* =========================================================
+   FINAL LANDSCAPE DISTRIBUTION FIX
+   Only affects tablet landscape / wide mobile landscape.
+   ========================================================= */
+
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 1100px) {
+
+    /*
+     * The page itself becomes a clean 2-column composition:
+     * ┌──────────────────────────────┬─────────────┐
+     * │ Vehicle Hero                 │ Actions     │
+     * ├──────────────────────────────┴─────────────┤
+     * │ Technical Summary                           │
+     * ├─────────────────────────────────────────────┤
+     * │ Basic │ Technical │ Registration            │
+     * ├─────────────────────────────────────────────┤
+     * │ Odometer │ Ownership │ Notes                │
+     * └─────────────────────────────────────────────┘
+     */
+    .vehicle-details-page {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 285px;
+        grid-auto-flow: row;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .vehicle-pagebar {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .vehicle-hero {
+        grid-column: 1;
+        grid-row: 2;
+        min-width: 0;
+        min-height: 205px;
+        grid-template-columns: minmax(0, 1.08fr) minmax(180px, .92fr);
+        gap: 6px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    /*
+     * Remove the old reserved-right-space rule.
+     * The action buttons now have their own real grid column.
+     */
+    .vehicle-hero {
+        padding-right: 12px;
+    }
+
+    .vehicle-hero__visual {
+        min-width: 0;
+        min-height: 180px;
+    }
+
+    .vehicle-hero__image {
+        width: min(100%, 410px);
+        max-width: 410px;
+        max-height: 180px;
+    }
+
+    .vehicle-hero__info {
+        min-width: 0;
+        padding: 4px 6px;
+        align-self: center;
+    }
+
+    .vehicle-hero__brand-mark {
+        width: 39px;
+        height: 39px;
+        margin-bottom: 6px;
+        margin-inline-start: 0;
+        font-size: 16px;
+    }
+
+    .vehicle-hero__model {
+        font-size: 19px;
+    }
+
+    .vehicle-hero__meta {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .active-badge {
+        font-size: 9px;
+        padding: 3px 10px;
+    }
+
+    .vehicle-plate {
+        font-size: 11px;
+    }
+
+    /*
+     * Action rail is no longer absolute.
+     * This fixes overlap, large empty space and inconsistent positioning.
+     */
+    .vehicle-actions {
+        position: static;
+        width: auto;
+        grid-column: 2;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 9px;
+        padding: 0;
+    }
+
+    .vehicle-action {
+        width: 100%;
+        min-height: 58px;
+        justify-content: flex-start;
+        padding: 0 18px;
+        border-radius: 13px;
+        font-size: 11px;
+    }
+
+    .vehicle-action i {
+        width: 19px;
+        font-size: 14px;
+    }
+
+    /*
+     * Full-width sections below the hero/action row.
+     */
+    .vehicle-summary {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .vehicle-info-grid {
+        grid-column: 1 / -1;
+        grid-row: 4;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .vehicle-info-card {
+        min-width: 0;
+    }
+
+    .vehicle-secondary-grid {
+        grid-column: 1 / -1;
+        grid-row: 5;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    /*
+     * Critical fix:
+     * Notes must occupy the third column instead of spanning two columns,
+     * which was creating the large empty area on the right.
+     */
+    .notes-card {
+        grid-column: auto;
+    }
+
+    .odometer-card,
+    .ownership-card,
+    .notes-card {
+        min-width: 0;
+    }
+
+    .vehicle-field {
+        min-width: 0;
+    }
+
+    .vehicle-field__value {
+        overflow-wrap: anywhere;
+    }
+
+    /*
+     * Keep the bottom navigation visually compact in landscape.
+     */
+    .app-shell {
+        padding-bottom: 92px;
+    }
+
+    .bottom-nav {
+        min-height: 64px;
+        bottom: max(7px, env(safe-area-inset-bottom));
+        padding-block: 3px;
+    }
+
+    .nav-item {
+        height: 54px;
+    }
+
+    .fab-slot {
+        height: 62px;
+    }
+
+    .fab {
+        width: 62px;
+        height: 62px;
+    }
+}
+
+/* Landscape screens with less width need a slightly narrower action rail. */
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 850px) {
+    .vehicle-details-page {
+        grid-template-columns: minmax(0, 1fr) 235px;
+        gap: 8px;
+    }
+
+    .vehicle-hero {
+        grid-template-columns: minmax(0, 1.12fr) minmax(145px, .88fr);
+        min-height: 185px;
+    }
+
+    .vehicle-hero__visual,
+    .vehicle-hero__image {
+        max-height: 160px;
+    }
+
+    .vehicle-action {
+        min-height: 51px;
+        padding-inline: 12px;
+    }
+
+    .vehicle-summary__item {
+        min-height: 64px;
+        padding: 8px;
+    }
+
+    .vehicle-info-grid,
+    .vehicle-secondary-grid {
+        gap: 8px;
+    }
+}

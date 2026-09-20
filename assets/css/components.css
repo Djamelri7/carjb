@@ -1,0 +1,1291 @@
+/* =========================================================
+   CarCare — Phase 03 Components
+   Header / Search / Bottom Navigation / FAB
+   ========================================================= */
+
+.app-header {
+    position: fixed;
+    z-index: 120;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 220px minmax(280px, 1fr) auto;
+    align-items: center;
+    gap: 28px;
+    min-height: 86px;
+    padding: 14px max(28px, calc((100vw - var(--container-width)) / 2 + 28px));
+    margin: 0;
+    background: color-mix(in srgb, var(--color-bg) 96%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 6px 22px rgba(38, 73, 110, 0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transform: translateY(0);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    will-change: transform;
+}
+
+.app-header.is-hidden {
+    transform: translateY(-110%);
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand__name {
+    font-size: clamp(30px, 2.3vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1.8px;
+}
+
+.brand__car {
+    color: var(--color-text);
+}
+
+.brand__care {
+    color: var(--color-primary);
+}
+
+.brand__tagline {
+    margin-top: 7px;
+    color: var(--color-text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.header-greeting {
+    min-width: 0;
+}
+
+.header-greeting__title {
+    font-size: clamp(20px, 1.8vw, 30px);
+    font-weight: 800;
+    letter-spacing: -.7px;
+}
+
+.header-greeting__date {
+    margin-top: 2px;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.search-box {
+    width: min(100%, 390px);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 30px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.search-box__icon {
+    color: var(--color-text-secondary);
+    font-size: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.search-box input::placeholder {
+    color: var(--color-text-secondary);
+}
+
+.icon-button {
+    width: 56px;
+    height: 56px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.icon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+
+.notification-dot {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--color-surface);
+    border-radius: 50%;
+    background: var(--color-danger);
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-surface-soft);
+    color: var(--color-text);
+    font-size: 17px;
+    font-weight: 800;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    width: min(calc(100% - 48px), 1480px);
+    min-height: 86px;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    padding: 8px 22px;
+    border: 1px solid var(--color-border);
+    border-radius: 30px;
+    background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+    box-shadow: 0 14px 38px rgba(34, 65, 100, .14);
+    backdrop-filter: blur(16px);
+}
+
+.nav-item {
+    height: 70px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--color-text-secondary);
+    background: transparent;
+    font-size: 14px;
+    font-weight: 700;
+    transition: color var(--transition), transform var(--transition);
+}
+
+.nav-item i {
+    font-size: 25px;
+}
+
+.nav-item:hover {
+    color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.nav-item.is-active {
+    color: var(--color-primary);
+}
+
+.nav-item.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: 1px;
+    width: 42px;
+    height: 5px;
+    border-radius: 99px;
+    background: var(--color-primary);
+}
+
+.fab-slot {
+    height: 86px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.fab {
+    width: 82px;
+    height: 82px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    border: 6px solid var(--color-bg);
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(8, 127, 245, .28);
+    font-size: 37px;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.fab:hover {
+    transform: translate(-50%, -53%) scale(1.03);
+    box-shadow: 0 14px 30px rgba(8, 127, 245, .35);
+}
+
+.fab i {
+    pointer-events: none;
+}
+
+/* Mobile header */
+@media (max-width: 900px) {
+   .app-header {
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+    }
+
+    .header-greeting,
+    .search-box {
+        display: none;
+    }
+
+    .brand__name {
+        font-size: 31px;
+    }
+
+    .brand__tagline {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .header-actions {
+        gap: 9px;
+    }
+
+    .icon-button,
+    .avatar {
+        width: 48px;
+        height: 48px;
+    }
+
+    .notification-dot {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .app-header {
+        min-height: 70px;
+        padding: 9px 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bottom-nav {
+        width: calc(100% - 24px);
+        min-height: 76px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        padding: 5px 6px;
+        border-radius: 24px;
+    }
+
+    .nav-item {
+        height: 64px;
+        font-size: 11px;
+    }
+
+    .nav-item i {
+        font-size: 22px;
+    }
+
+    .nav-item.is-active::after {
+        width: 34px;
+        height: 4px;
+    }
+
+    .fab-slot {
+        height: 76px;
+    }
+
+    .fab {
+        width: 68px;
+        height: 68px;
+        border-width: 5px;
+        font-size: 31px;
+    }
+}
+
+/* =========================================================
+   PHASE 05 — Navigation Refinement
+   ========================================================= */
+
+.bottom-nav {
+    bottom: max(18px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 600px) {
+    .bottom-nav {
+        left: 12px;
+        right: 12px;
+        bottom: max(7px, env(safe-area-inset-bottom));
+        width: auto;
+        min-height: 74px;
+        transform: none;
+        padding:
+            4px
+            5px
+            calc(4px + env(safe-area-inset-bottom));
+        border-radius: 23px;
+    }
+
+    .nav-item {
+        min-width: 0;
+        height: 61px;
+        gap: 1px;
+        font-size: 10px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-item i {
+        font-size: 21px;
+    }
+
+    .nav-item.is-active::after {
+        bottom: 0;
+        width: 32px;
+        height: 4px;
+    }
+
+    .fab-slot {
+        height: 72px;
+    }
+
+    .fab {
+        width: 67px;
+        height: 67px;
+        border-width: 5px;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 380px) {
+    .bottom-nav {
+        left: 9px;
+        right: 9px;
+        border-radius: 21px;
+    }
+
+    .nav-item {
+        font-size: 9px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+
+    .fab {
+        width: 63px;
+        height: 63px;
+        font-size: 28px;
+    }
+}
+
+/* =========================================================
+   PHASE 12 — Glass Settings Experience
+   ========================================================= */
+.settings-button{cursor:pointer}.settings-button[aria-expanded="true"]{color:var(--color-primary);border-color:rgba(8,127,245,.42);background:rgba(255,255,255,.42)}
+.settings-overlay{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:22px}.settings-overlay[hidden]{display:none}.settings-backdrop{position:absolute;inset:0;background:rgba(15,31,50,.34);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .18s ease}.settings-modal{position:relative;z-index:2;width:min(720px,100%);max-height:min(92dvh,920px);overflow:hidden auto;border:1px solid rgba(255,255,255,.46);border-radius:32px;background:linear-gradient(145deg,rgba(37,69,103,.82),rgba(16,36,60,.78));box-shadow:0 30px 90px rgba(7,24,45,.36),inset 0 1px 0 rgba(255,255,255,.32);backdrop-filter:blur(24px) saturate(120%);-webkit-backdrop-filter:blur(24px) saturate(120%);opacity:0;transform:translateY(20px) scale(.985);transition:opacity .18s ease,transform .18s ease}.settings-overlay.is-visible .settings-backdrop{opacity:1}.settings-overlay.is-visible .settings-modal{opacity:1;transform:translateY(0) scale(1)}
+.settings-modal__hero{position:relative;min-height:235px;overflow:hidden}.settings-modal__hero-image{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,31,53,.92),rgba(18,44,72,.62) 45%,rgba(13,31,50,.28)),url("../images/vehicle-polo.png") center 62%/cover no-repeat;filter:saturate(.95) contrast(1.04);transform:scale(1.04)}.settings-modal__hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,28,48,.08),rgba(9,22,39,.55))}.settings-modal__close{position:absolute;top:18px;right:18px;z-index:3;width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);border-radius:50%;background:rgba(255,255,255,.10);color:#fff;font-size:19px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.settings-modal__hero-content{position:relative;z-index:2;padding:28px 32px 24px;color:#fff}.settings-modal__title-row{display:flex;align-items:center;gap:18px}.settings-modal__main-icon{width:76px;height:76px;display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(126,206,255,.62);border-radius:24px;background:linear-gradient(145deg,rgba(20,143,255,.90),rgba(54,183,255,.58));box-shadow:0 12px 34px rgba(0,129,255,.30),inset 0 1px 0 rgba(255,255,255,.38);font-size:34px}.settings-modal__title-row h2{margin:0;font-size:clamp(25px,3vw,34px);font-weight:800;letter-spacing:-.8px}.settings-modal__title-row p{margin:5px 0 0;color:rgba(240,247,255,.84);font-size:13px;font-weight:600}.settings-modal__brand{margin-top:30px;display:flex;flex-direction:column;gap:2px}.settings-modal__brand strong{font-size:38px;line-height:1;letter-spacing:-1.8px;background:linear-gradient(90deg,#fff 0 47%,#188cff 47%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.settings-modal__brand small{color:rgba(239,247,255,.82);font-size:13px;font-weight:600}
+.settings-modal__body{padding:0 18px 20px}.settings-section,.settings-row,.settings-inline-card{border:1px solid rgba(255,255,255,.17);background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.08));box-shadow:inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.settings-section{border-radius:22px;padding:12px;margin-bottom:9px}.settings-section__heading,.settings-inline-row,.settings-row{display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:12px}.settings-section__heading{min-height:56px;padding:0 6px 8px;color:#fff}.settings-section__heading>div,.settings-row__copy{min-width:0;display:flex;flex-direction:column;gap:3px;text-align:left}.settings-section__heading strong,.settings-row__copy strong{color:#fff;font-size:15px;font-weight:800}.settings-section__heading small,.settings-row__copy small{color:rgba(236,246,255,.72);font-size:10px;font-weight:600}.settings-section__icon,.settings-row__icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;color:#fff;font-size:20px}.settings-section__icon--sun{background:rgba(255,187,40,.16);color:#ffbf3e}.settings-row__icon--cyan{background:rgba(19,214,239,.16);color:#20d8ef}.settings-row__icon--blue{background:rgba(44,151,255,.18);color:#53a8ff}.settings-row__icon--red{background:rgba(255,74,96,.17);color:#ff6677}.settings-row__icon--green{background:rgba(49,211,113,.18);color:#46d980}.settings-row__icon--purple{background:rgba(150,91,255,.18);color:#a477ff}.settings-row__icon--soft{background:rgba(255,255,255,.10);color:#e9f4ff}.settings-section__arrow,.settings-row__arrow{color:rgba(242,249,255,.88);font-size:15px}
+.appearance-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.appearance-option{position:relative;min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.16);border-radius:17px;background:rgba(16,36,60,.34);color:#fff;font-size:12px;font-weight:800}.appearance-option>i{font-size:24px;color:#edf7ff}.appearance-option.is-selected{border-color:#49aaff;background:linear-gradient(145deg,rgba(36,145,255,.30),rgba(23,95,180,.20));box-shadow:0 0 0 1px rgba(74,170,255,.22),0 10px 26px rgba(0,118,255,.14)}.appearance-option b{position:absolute;top:8px;right:8px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#fff;color:var(--color-primary);font-size:11px}
+.settings-row{width:100%;min-height:74px;margin-bottom:9px;padding:10px 13px;border-radius:19px;color:#fff;text-align:left;cursor:pointer}.settings-row:hover{background:linear-gradient(135deg,rgba(255,255,255,.19),rgba(255,255,255,.10))}.settings-inline-card{overflow:hidden;margin:-2px 0 9px;border-radius:19px}.settings-inline-row{min-height:66px;padding:8px 13px}.settings-inline-row+.settings-inline-row{border-top:1px solid rgba(255,255,255,.11)}.settings-value-button{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.10);border-radius:14px;background:rgba(255,255,255,.07);color:#eef7ff;font-size:11px;font-weight:700}.settings-value-button i{font-size:9px}.segmented-control{display:flex;padding:3px;border:1px solid rgba(255,255,255,.10);border-radius:15px;background:rgba(8,24,43,.26)}.segmented-control button{min-width:60px;padding:8px 11px;border-radius:12px;background:transparent;color:rgba(235,246,255,.76);font-size:11px;font-weight:800}.segmented-control button.is-active{background:linear-gradient(135deg,#158cff,#3b9dff);color:#fff;box-shadow:0 5px 16px rgba(0,125,255,.25)}.settings-row--danger{border-color:rgba(255,91,104,.38);background:linear-gradient(135deg,rgba(255,91,104,.17),rgba(255,71,91,.08))}.settings-row--danger .settings-row__icon,.settings-row--danger .settings-row__copy strong,.settings-row--danger .settings-row__arrow{color:#ff6976}.settings-row--danger .settings-row__icon{background:rgba(255,77,95,.18)}
+.settings-modal::-webkit-scrollbar{width:5px}.settings-modal::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:99px}body.settings-modal-open{overflow:hidden}
+@media(max-width:900px){.settings-overlay{padding:12px}.settings-modal{width:min(620px,100%);max-height:94dvh;border-radius:28px}.settings-modal__hero{min-height:210px}.settings-modal__hero-content{padding:24px 22px 20px}.settings-modal__brand{margin-top:23px}.settings-modal__brand strong{font-size:32px}}
+@media(max-width:600px){.avatar{display:none}.settings-overlay{padding:0;place-items:end center}.settings-modal{width:100%;max-height:94dvh;border-radius:28px 28px 0 0;transform:translateY(28px)}.settings-modal__hero{min-height:220px}.settings-modal__hero-content{padding:22px 18px 18px}.settings-modal__main-icon{width:62px;height:62px;border-radius:20px;font-size:28px}.settings-modal__title-row{gap:13px}.settings-modal__title-row h2{font-size:25px}.settings-modal__title-row p{font-size:11px}.settings-modal__brand strong{font-size:34px}.settings-modal__body{padding:0 10px 14px}.settings-section__heading,.settings-inline-row,.settings-row{grid-template-columns:46px minmax(0,1fr) auto;gap:10px}.settings-section__icon,.settings-row__icon{width:42px;height:42px;border-radius:13px;font-size:17px}.settings-section__heading strong,.settings-row__copy strong{font-size:13px}.settings-section__heading small,.settings-row__copy small{font-size:9px}.appearance-option{min-height:76px}.appearance-option>i{font-size:21px}.settings-value-button{font-size:10px;padding:7px 9px}.segmented-control button{min-width:50px;padding:7px 8px}}
+
+/* =========================================================
+   PHASE 12 — Settings Compact / Fixed Vehicle Hero
+   ========================================================= */
+.settings-modal{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+.settings-modal__hero{
+    flex:0 0 auto;
+    min-height:205px;
+}
+.settings-modal__body{
+    flex:1 1 auto;
+    min-height:0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
+}
+.settings-modal__body::-webkit-scrollbar{width:4px}
+.settings-modal__body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24);border-radius:99px}
+.settings-modal__hero-content{padding:22px 26px 18px}
+.settings-modal__main-icon{width:62px;height:62px;border-radius:20px;font-size:28px}
+.settings-modal__title-row{gap:14px}
+.settings-modal__title-row h2{font-size:25px;letter-spacing:-.5px}
+.settings-modal__title-row p{font-size:11px;margin-top:3px}
+.settings-modal__brand{margin-top:20px}
+.settings-modal__brand strong{font-size:32px;letter-spacing:-1.3px}
+.settings-modal__brand small{font-size:11px}
+.settings-section{padding:9px;margin-bottom:7px;border-radius:19px}
+.settings-section__heading{min-height:48px;padding:0 5px 6px;grid-template-columns:44px minmax(0,1fr) auto;gap:9px}
+.settings-section__heading strong,.settings-row__copy strong{font-size:13px}
+.settings-section__heading small,.settings-row__copy small{font-size:9px}
+.settings-section__icon,.settings-row__icon{width:40px;height:40px;border-radius:12px;font-size:17px}
+.appearance-options{gap:7px}
+.appearance-option{min-height:70px;border-radius:15px;gap:5px;font-size:11px}
+.appearance-option>i{font-size:21px}
+.appearance-option b{top:6px;right:6px;width:19px;height:19px;font-size:9px}
+.settings-row{min-height:60px;margin-bottom:7px;padding:8px 10px;border-radius:16px;grid-template-columns:44px minmax(0,1fr) auto;gap:9px}
+.settings-inline-card{margin:-1px 0 7px;border-radius:16px}
+.settings-inline-row{min-height:57px;padding:7px 10px;grid-template-columns:44px minmax(0,1fr) auto;gap:9px}
+.settings-value-button{padding:7px 10px;font-size:10px;border-radius:12px}
+.segmented-control{border-radius:13px}
+.segmented-control button{min-width:54px;padding:7px 9px;font-size:10px;border-radius:10px}
+
+@media(max-width:900px){
+    .settings-modal{max-height:90dvh}
+    .settings-modal__hero{min-height:190px}
+}
+
+@media(max-width:600px){
+    .settings-overlay{padding:0}
+    .settings-modal{max-height:90dvh;border-radius:24px 24px 0 0}
+    .settings-modal__hero{min-height:178px}
+    .settings-modal__hero-content{padding:18px 16px 14px}
+    .settings-modal__main-icon{width:54px;height:54px;border-radius:17px;font-size:24px}
+    .settings-modal__title-row{gap:11px}
+    .settings-modal__title-row h2{font-size:22px}
+    .settings-modal__title-row p{font-size:10px}
+    .settings-modal__close{top:14px;right:14px;width:40px;height:40px;font-size:16px}
+    .settings-modal__brand{margin-top:16px}
+    .settings-modal__brand strong{font-size:29px}
+    .settings-modal__brand small{font-size:10px}
+    .settings-modal__body{padding:0 8px 10px}
+    .settings-section{padding:8px;border-radius:17px;margin-bottom:6px}
+    .settings-section__heading{min-height:44px;grid-template-columns:40px minmax(0,1fr) auto;gap:8px}
+    .settings-section__icon,.settings-row__icon{width:38px;height:38px;border-radius:11px;font-size:16px}
+    .settings-row{min-height:56px;grid-template-columns:40px minmax(0,1fr) auto;gap:8px;padding:7px 9px;margin-bottom:6px;border-radius:15px}
+    .settings-inline-row{min-height:52px;grid-template-columns:40px minmax(0,1fr) auto;gap:8px;padding:6px 9px}
+    .settings-section__heading strong,.settings-row__copy strong{font-size:12px}
+    .settings-section__heading small,.settings-row__copy small{font-size:8.5px}
+    .appearance-option{min-height:64px;font-size:10px}
+    .appearance-option>i{font-size:19px}
+    .settings-value-button{font-size:9.5px;padding:6px 8px}
+    .segmented-control button{min-width:48px;padding:6px 8px;font-size:9.5px}
+}
+
+/* PHASE 12 — Settings compact dimensions (mobile reference)
+   Target: ~50% viewport width × ~65% viewport height. */
+.settings-modal{
+    width:min(50vw,560px);
+    height:65dvh;
+    max-height:65dvh;
+    border-radius:24px;
+}
+.settings-modal__hero{
+    min-height:172px;
+}
+.settings-modal__body{
+    min-height:0;
+    overflow-y:auto;
+}
+
+@media(max-width:900px){
+    .settings-modal{
+        width:50vw;
+        height:65dvh;
+        max-height:65dvh;
+        border-radius:22px;
+    }
+}
+
+@media(max-width:600px){
+    .settings-overlay{
+        padding:0;
+        place-items:center;
+    }
+    .settings-modal{
+        width:50vw;
+        height:65dvh;
+        max-height:65dvh;
+        border-radius:20px;
+    }
+    .settings-modal__hero{
+        min-height:145px;
+    }
+    .settings-modal__hero-content{
+        padding:15px 12px 11px;
+    }
+    .settings-modal__main-icon{
+        width:44px;
+        height:44px;
+        border-radius:14px;
+        font-size:20px;
+    }
+    .settings-modal__title-row{gap:8px}
+    .settings-modal__title-row h2{font-size:18px}
+    .settings-modal__title-row p{font-size:8px}
+    .settings-modal__close{
+        top:9px;
+        right:9px;
+        width:32px;
+        height:32px;
+        font-size:13px;
+    }
+    .settings-modal__brand{margin-top:12px}
+    .settings-modal__brand strong{font-size:23px}
+    .settings-modal__brand small{font-size:8px}
+    .settings-modal__body{padding:0 6px 8px}
+    .settings-section{padding:6px;border-radius:14px;margin-bottom:5px}
+    .settings-section__heading{
+        min-height:36px;
+        grid-template-columns:32px minmax(0,1fr) auto;
+        gap:6px;
+        padding:0 3px 4px;
+    }
+    .settings-section__icon,.settings-row__icon{
+        width:30px;
+        height:30px;
+        border-radius:9px;
+        font-size:13px;
+    }
+    .settings-section__heading strong,.settings-row__copy strong{font-size:10px}
+    .settings-section__heading small,.settings-row__copy small{font-size:7px}
+    .settings-row{
+        min-height:42px;
+        grid-template-columns:32px minmax(0,1fr) auto;
+        gap:6px;
+        padding:5px 6px;
+        margin-bottom:4px;
+        border-radius:11px;
+    }
+    .settings-inline-card{margin:-1px 0 4px;border-radius:11px}
+    .settings-inline-row{
+        min-height:39px;
+        grid-template-columns:32px minmax(0,1fr) auto;
+        gap:6px;
+        padding:4px 6px;
+    }
+    .settings-value-button{font-size:7.5px;padding:5px 6px;border-radius:9px}
+    .segmented-control{border-radius:9px}
+    .segmented-control button{min-width:35px;padding:5px 5px;font-size:7.5px;border-radius:7px}
+    .appearance-options{gap:4px}
+    .appearance-option{min-height:46px;border-radius:10px;gap:3px;font-size:8px}
+    .appearance-option>i{font-size:14px}
+    .appearance-option b{top:4px;right:4px;width:14px;height:14px;font-size:7px}
+}
+
+
+/* =========================================================
+   PHASE 12 — Compact right-side Settings panel
+   Mobile: 60vw × 65dvh, directly below the fixed header.
+   Backdrop blurs page content only and stops above Bottom Navigation.
+   ========================================================= */
+.settings-overlay{
+    position:fixed;
+    inset:0;
+    z-index:300;
+    display:block;
+    padding:0;
+}
+.settings-overlay[hidden]{display:none}
+.settings-backdrop{
+    position:absolute;
+    top:70px;
+    right:0;
+    bottom:92px;
+    left:0;
+    background:rgba(15,31,50,.30);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+.settings-modal{
+    position:absolute;
+    top:70px;
+    right:0;
+    width:60vw;
+    height:65dvh;
+    max-height:65dvh;
+    margin:0;
+    border-radius:22px 0 0 22px;
+    overflow:hidden;
+    transform:translateX(24px) scale(.985);
+}
+.settings-overlay.is-visible .settings-modal{
+    transform:translateX(0) scale(1);
+}
+.settings-modal__hero{
+    min-height:170px;
+}
+.settings-modal__body{
+    min-height:0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+}
+
+@media (min-width:901px){
+    .settings-backdrop{
+        top:86px;
+        bottom:100px;
+    }
+    .settings-modal{
+        top:86px;
+        width:min(60vw,680px);
+    }
+}
+
+@media (max-width:600px){
+    .settings-overlay{
+        padding:0;
+        place-items:unset;
+    }
+    .settings-backdrop{
+        top:70px;
+        bottom:92px;
+    }
+    .settings-modal{
+        top:70px;
+        right:0;
+        width:60vw;
+        height:65dvh;
+        max-height:65dvh;
+        border-radius:20px 0 0 20px;
+        transform:translateX(22px) scale(.985);
+    }
+    .settings-overlay.is-visible .settings-modal{
+        transform:translateX(0) scale(1);
+    }
+}
+
+/* =========================================================
+   PHASE 12 — Settings transparent list refinement
+   ========================================================= */
+.settings-backdrop{
+    background:rgba(15,31,50,.24);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+}
+.settings-modal{
+    background:rgba(27,54,82,.82);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+}
+.settings-section,
+.settings-row,
+.settings-inline-card{
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+}
+.settings-section{
+    padding:0;
+    margin:0;
+    border-radius:0;
+}
+.settings-section + .settings-section{
+    border-top:1px solid rgba(255,255,255,.16);
+}
+.settings-section__heading{
+    padding:10px 5px 8px;
+}
+.settings-row{
+    border-radius:0;
+    margin:0;
+    border-top:1px solid rgba(255,255,255,.13);
+    padding:9px 10px;
+}
+.settings-inline-card{
+    margin:0;
+    border-radius:0;
+    overflow:visible;
+}
+.settings-inline-row{
+    border-radius:0;
+}
+.settings-inline-row + .settings-inline-row{
+    border-top:1px solid rgba(255,255,255,.13);
+}
+.settings-row:hover{
+    background:rgba(255,255,255,.035);
+}
+.settings-modal__body{
+    padding:0 10px 12px;
+}
+
+@media(max-width:600px){
+    .settings-section__heading{padding:9px 4px 7px}
+    .settings-row{padding:8px 8px}
+    .settings-modal__body{padding:0 8px 10px}
+}
+
+
+/* =========================================================
+   PHASE 12 FINAL — Transparent Settings / Light + Dark
+   ========================================================= */
+.settings-backdrop{
+    background:rgba(10,24,40,.22);
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.settings-modal{
+    width:min(60vw,640px);
+    height:65dvh;
+    max-height:65dvh;
+    border-radius:12px;
+    border:1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    background:color-mix(in srgb, var(--color-surface) 78%, transparent);
+    box-shadow:0 22px 60px rgba(20,45,75,.18), inset 0 1px 0 rgba(255,255,255,.55);
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    color:var(--color-text);
+}
+.settings-modal__hero{
+    min-height:108px;
+    background:transparent;
+    border-bottom:1px solid var(--color-divider);
+}
+.settings-modal__hero-content{padding:18px 20px 14px;color:var(--color-text)}
+.settings-modal__title-row h2{color:var(--color-text);font-size:22px}
+.settings-modal__title-row p{color:var(--color-text-secondary);font-size:10px}
+.settings-modal__main-icon{width:50px;height:50px;border-radius:12px;font-size:22px}
+.settings-modal__close{
+    top:14px;right:14px;width:36px;height:36px;
+    border:1px solid var(--color-border);background:transparent;color:var(--color-text);
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.settings-modal__brand{display:none}
+.settings-modal__hero-image,.settings-modal__hero-overlay{display:none}
+.settings-modal__body{padding:0 10px 10px}
+.settings-section,.settings-row,.settings-inline-card{
+    background:transparent !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.settings-section{border-radius:0 !important;border:0 !important}
+.settings-section + .settings-section{border-top:1px solid var(--color-divider) !important}
+.settings-section__heading strong,.settings-row__copy strong{color:var(--color-text)}
+.settings-section__heading small,.settings-row__copy small{color:var(--color-text-secondary)}
+.settings-section__icon,.settings-row__icon{background:color-mix(in srgb, var(--color-primary) 9%, transparent);color:var(--color-primary)}
+.settings-section__arrow,.settings-row__arrow{color:var(--color-text-secondary)}
+.settings-row{color:var(--color-text);border-top:1px solid var(--color-divider);border-bottom:0}
+.settings-row:hover{background:color-mix(in srgb, var(--color-primary) 4%, transparent) !important}
+.settings-inline-row + .settings-inline-row{border-top:1px solid var(--color-divider)}
+.settings-value-button{border:1px solid var(--color-border);background:transparent;color:var(--color-text)}
+.segmented-control{border:1px solid var(--color-border);background:color-mix(in srgb, var(--color-surface-soft) 55%, transparent)}
+.segmented-control button{color:var(--color-text-secondary)}
+.appearance-option{border:1px solid var(--color-border);background:transparent;color:var(--color-text)}
+.appearance-option>i{color:var(--color-text-secondary)}
+.appearance-option.is-selected{border-color:var(--color-primary);background:var(--color-primary-soft);box-shadow:none}
+.settings-row--danger{border-color:color-mix(in srgb, var(--color-danger) 35%, var(--color-divider));background:color-mix(in srgb, var(--color-danger-soft) 75%, transparent) !important}
+
+[data-theme="dark"] .settings-backdrop{background:rgba(0,0,0,.28)}
+[data-theme="dark"] .settings-modal{
+    background:rgba(13,32,44,.78);
+    border-color:rgba(255,255,255,.12);
+    box-shadow:0 22px 60px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.08);
+}
+[data-theme="dark"] .settings-modal__hero{border-bottom-color:var(--color-divider)}
+[data-theme="dark"] .settings-modal__close{border-color:rgba(255,255,255,.16);color:var(--color-text)}
+
+@media(max-width:900px){
+    .settings-modal{width:60vw;height:65dvh;max-height:65dvh;border-radius:12px}
+}
+@media(max-width:600px){
+    .settings-overlay{padding:0;place-items:end end}
+    .settings-modal{width:60vw;height:65dvh;max-height:65dvh;border-radius:10px 0 0 10px}
+    .settings-modal__hero{min-height:100px}
+    .settings-modal__hero-content{padding:14px 12px 10px}
+    .settings-modal__main-icon{width:46px;height:46px;border-radius:11px;font-size:20px}
+    .settings-modal__title-row h2{font-size:20px}
+    .settings-modal__title-row p{font-size:9px}
+    .settings-modal__close{top:10px;right:10px;width:32px;height:32px;font-size:14px}
+}
+
+/* =========================================================
+   PHASE 12 FINAL-2 — Clean Settings + Preferences sub-view
+   ========================================================= */
+.settings-backdrop{
+    background:rgba(15,31,50,.34) !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.settings-modal{
+    background:color-mix(in srgb, var(--color-surface) 94%, transparent) !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    border-radius:6px 0 0 6px !important;
+}
+.settings-view-stack{
+    position:relative;
+    overflow:hidden !important;
+    overflow-x:hidden !important;
+}
+.settings-view{
+    width:100%;
+    min-height:100%;
+    transition:transform .24s ease, opacity .24s ease;
+    will-change:transform;
+}
+.settings-view--main{
+    transform:translateX(0);
+}
+.settings-view--preferences{
+    position:absolute;
+    inset:0;
+    overflow-y:auto;
+    transform:translateX(100%);
+    opacity:0;
+    pointer-events:none;
+    padding:0 2px 12px;
+}
+.settings-view-stack.preferences-open .settings-view--main{
+    transform:translateX(-100%);
+    opacity:0;
+    pointer-events:none;
+}
+.settings-view-stack.preferences-open .settings-view--preferences{
+    transform:translateX(0);
+    opacity:1;
+    pointer-events:auto;
+}
+.settings-preferences-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-height:52px;
+    padding:4px 8px 8px;
+    border-bottom:1px solid var(--color-divider);
+}
+.settings-preferences-back{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    display:grid;
+    place-items:center;
+    border:0;
+    border-radius:50%;
+    background:transparent;
+    color:var(--color-text);
+    cursor:pointer;
+}
+.settings-preferences-back:hover{
+    background:color-mix(in srgb, var(--color-primary) 7%, transparent);
+    color:var(--color-primary);
+}
+.settings-preferences-header strong{
+    display:block;
+    color:var(--color-text);
+    font-size:14px;
+    line-height:1.2;
+}
+.settings-preferences-header small{
+    display:block;
+    margin-top:3px;
+    color:var(--color-text-secondary);
+    font-size:9px;
+}
+.settings-preference-list{
+    width:100%;
+}
+.settings-preference-row{
+    min-height:62px;
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr) auto;
+    align-items:center;
+    gap:9px;
+    padding:8px 8px;
+    border-bottom:1px solid var(--color-divider);
+}
+.settings-preference-row .settings-row__copy strong{
+    font-size:12px;
+}
+.settings-preference-row .settings-row__copy small{
+    font-size:8.5px;
+}
+.settings-inline-card--legacy{display:none !important}
+
+[data-theme="dark"] .settings-modal{
+    background:rgba(20,32,45,.96) !important;
+}
+
+@media(max-width:600px){
+    .settings-modal{border-radius:5px 0 0 5px !important}
+    .settings-preferences-header{min-height:48px;padding:3px 6px 7px}
+    .settings-preferences-back{width:32px;height:32px;flex-basis:32px}
+    .settings-preferences-header strong{font-size:13px}
+    .settings-preferences-header small{font-size:8px}
+    .settings-preference-row{min-height:58px;grid-template-columns:36px minmax(0,1fr) auto;gap:7px;padding:7px 6px}
+}
+
+/* PHASE 12 FINAL-3 — More opaque Settings / zero blur */
+.settings-backdrop{
+    background:rgba(15,31,50,.18) !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.settings-modal{
+    background:color-mix(in srgb, var(--color-surface) 98%, transparent) !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+.settings-modal *,
+.settings-section,
+.settings-row,
+.settings-inline-card,
+.settings-modal__close{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+[data-theme="dark"] .settings-modal{
+    background:color-mix(in srgb, var(--color-surface) 98%, transparent) !important;
+}
+
+/* PHASE 12 FINAL-4 — Settings interaction refinement */
+.settings-modal__body{
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+    overscroll-behavior:contain;
+}
+.settings-modal__body .settings-view{
+    min-height:0;
+}
+.settings-view--main.is-active,
+.settings-view--preferences.is-active{
+    overflow:visible;
+}
+/* Remove selection indicator circles from Light / Dark / System cards. */
+.appearance-option b{display:none !important;}
+.appearance-option.is-selected::after{display:none !important;}
+/* Reset is a clear standalone action button. */
+.settings-reset-button{
+    width:100%;
+    min-height:42px;
+    margin:8px 0 4px;
+    padding:9px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    border:1px solid color-mix(in srgb, #ef5f6f 45%, var(--color-divider));
+    border-radius:10px;
+    background:color-mix(in srgb, #ef5f6f 10%, transparent);
+    color:#d94c5d;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+}
+.settings-reset-button:hover{background:color-mix(in srgb,#ef5f6f 16%,transparent);}
+[data-theme="dark"] .settings-reset-button{color:#ff7b8a;}
+
+/* =========================================================
+   PHASE 12 FINAL-5 — App Transparency + Settings Toggle Polish
+   ========================================================= */
+/* Apply the requested ~85% transparency to the application content,
+   while keeping the fixed top navbar (and its Settings button) fully opaque. */
+#app-root > .app-shell,
+#app-root > .bottom-nav{
+    opacity:.85;
+}
+
+/* The Settings button itself stays fully opaque and clearly reflects its state. */
+.app-header .settings-button{
+    opacity:1 !important;
+}
+.app-header .settings-button[aria-expanded="true"]{
+    color:var(--color-primary) !important;
+    border-color:color-mix(in srgb, var(--color-primary) 42%, var(--color-border)) !important;
+    background:color-mix(in srgb, var(--color-primary) 9%, transparent) !important;
+}
+
+/* Remove the separator directly below the Light / Dark / System controls. */
+.settings-section--appearance + .settings-row{
+    border-top:0 !important;
+}
+
+
+/* PHASE 12 FINAL-6 — Compact Settings hero icon + remove Appearance arrow */
+.settings-modal__main-icon--compact{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px;
+    border-radius:11px !important;
+    font-size:18px !important;
+    background:color-mix(in srgb, var(--color-primary) 14%, transparent) !important;
+    color:var(--color-primary) !important;
+}
+.settings-section--appearance .settings-section__heading{
+    grid-template-columns:44px minmax(0,1fr) !important;
+}
+@media(max-width:600px){
+    .settings-modal__main-icon--compact{
+        width:36px !important;
+        height:36px !important;
+        min-width:36px;
+        border-radius:10px !important;
+        font-size:16px !important;
+    }
+    .settings-section--appearance .settings-section__heading{
+        grid-template-columns:40px minmax(0,1fr) !important;
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE APP FRAME — fixed UI follows the centered app.
+   ========================================================= */
+@media (orientation: landscape) and (min-width: 901px) {
+    .app-header {
+        left: 50%;
+        right: auto;
+        width: min(1400px, calc(100vw - 48px));
+        transform: translateX(-50%);
+    }
+
+    .app-header.is-hidden {
+        transform: translate(-50%, -110%);
+    }
+
+    .bottom-nav {
+        width: min(1400px, calc(100vw - 48px));
+    }
+}
+
+
+/* PHASE 13 — Header Settings toggle / full app dim except top navbar */
+.settings-overlay{
+    z-index:300 !important;
+}
+
+/* The dimming layer starts below the fixed top navbar and covers the entire app,
+   including the bottom navigation. */
+.settings-backdrop{
+    top:86px !important;
+    bottom:0 !important;
+    left:0 !important;
+    right:0 !important;
+    background:rgba(0,0,0,.42) !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+}
+
+/* Keep the settings panel above the dimmed application. */
+.settings-modal{
+    top:86px !important;
+}
+
+/* The top navbar remains completely clear and interactive. */
+.app-header{
+    z-index:400 !important;
+}
+
+@media(max-width:600px){
+    .settings-backdrop{
+        top:70px !important;
+        bottom:0 !important;
+    }
+    .settings-modal{
+        top:70px !important;
+    }
+}
+
+/* =========================================================
+   SETTINGS PAGE — Normal Full Application Page
+   ========================================================= */
+.settings-page{
+    width:100%;
+    min-height:calc(100dvh - 150px);
+    padding:4px 0 20px;
+    color:var(--color-text);
+}
+.settings-page__topbar{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:18px;
+    padding:8px 0 16px;
+    border-bottom:1px solid var(--color-divider);
+}
+.settings-page__title{display:flex;align-items:center;gap:12px;min-width:0}
+.settings-page__title-icon{
+    width:46px;height:46px;display:grid;place-items:center;flex:0 0 auto;
+    border-radius:14px;background:var(--color-primary-soft);color:var(--color-primary);font-size:19px;
+}
+.settings-page__title h1,.settings-page__subheader h2{margin:0;color:var(--color-text);font-size:24px;font-weight:850;letter-spacing:-.4px}
+.settings-page__title p,.settings-page__subheader p{margin:3px 0 0;color:var(--color-text-secondary);font-size:11px;font-weight:600}
+.settings-page__back{
+    display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 12px;
+    border:1px solid var(--color-border);border-radius:11px;background:var(--color-surface);
+    color:var(--color-text);font-size:12px;font-weight:800;cursor:pointer;
+    box-shadow:var(--shadow-soft);
+}
+.settings-page__back:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.settings-page__section,
+.settings-page__row,
+.settings-page__preference-row{
+    border:1px solid var(--color-border);
+    background:var(--color-surface);
+    box-shadow:var(--shadow-soft);
+}
+.settings-page__section{border-radius:16px;padding:14px;margin-bottom:10px}
+.settings-page__section-heading{
+    display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:10px;margin-bottom:12px;
+}
+.settings-page__section-heading>div,.settings-page__copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.settings-page__section-heading strong,.settings-page__copy strong{font-size:14px;font-weight:850;color:var(--color-text)}
+.settings-page__section-heading small,.settings-page__copy small{font-size:10px;color:var(--color-text-secondary);font-weight:600}
+.settings-page__icon{
+    width:40px;height:40px;display:grid;place-items:center;border-radius:12px;flex:0 0 auto;font-size:17px;
+}
+.settings-page__icon--sun{background:var(--color-warning-soft);color:var(--color-warning)}
+.settings-page__icon--cyan{background:var(--color-primary-soft);color:var(--color-primary)}
+.settings-page__icon--blue{background:var(--color-primary-soft);color:var(--color-primary)}
+.settings-page__icon--red{background:var(--color-danger-soft);color:var(--color-danger)}
+.settings-page__icon--green{background:var(--color-success-soft);color:var(--color-success)}
+.settings-page__icon--purple{background:rgba(145,92,255,.12);color:#7c4dff}
+.settings-page__icon--soft{background:var(--color-surface-soft);color:var(--color-text-secondary)}
+.settings-page__row{
+    width:100%;min-height:62px;margin-bottom:9px;padding:9px 12px;display:grid;
+    grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:10px;border-radius:15px;
+    text-align:left;cursor:pointer;color:var(--color-text);
+}
+.settings-page__row:hover{border-color:color-mix(in srgb,var(--color-primary) 45%,var(--color-border))}
+.settings-page__arrow{color:var(--color-text-secondary);font-size:14px}
+.settings-page__reset{
+    width:100%;min-height:44px;margin:4px 0 10px;padding:9px 14px;display:flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid color-mix(in srgb,var(--color-danger) 45%,var(--color-border));border-radius:12px;
+    background:var(--color-danger-soft);color:var(--color-danger);font-size:11px;font-weight:850;cursor:pointer;
+}
+.settings-page__preferences{padding-top:0}
+.settings-page__subheader{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--color-divider)}
+.settings-page__back--sub{box-shadow:none}
+.settings-page__preference-row{
+    min-height:68px;margin-bottom:9px;padding:10px 12px;border-radius:15px;
+    display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:10px;
+}
+.settings-page .settings-value-button{border-color:var(--color-border);background:var(--color-surface-soft);color:var(--color-text)}
+.settings-page .segmented-control{border-color:var(--color-border);background:var(--color-surface-soft)}
+.settings-page .segmented-control button{color:var(--color-text-secondary)}
+.settings-page .segmented-control button.is-active{background:var(--color-primary);color:#fff;box-shadow:none}
+
+@media (max-width:700px){
+    .settings-page{min-height:calc(100dvh - 125px);padding-top:0}
+    .settings-page__topbar{gap:10px;margin-bottom:12px;padding:4px 0 12px}
+    .settings-page__title h1{font-size:21px}
+    .settings-page__title p{font-size:10px}
+    .settings-page__title-icon{width:42px;height:42px;border-radius:12px}
+    .settings-page__back{min-height:38px;padding:7px 10px;font-size:11px}
+    .settings-page__section{padding:11px;border-radius:14px}
+    .settings-page__row{min-height:58px;padding:8px 10px;border-radius:13px}
+    .settings-page__icon{width:38px;height:38px;border-radius:11px;font-size:16px}
+    .settings-page__section-heading strong,.settings-page__copy strong{font-size:13px}
+    .settings-page__section-heading small,.settings-page__copy small{font-size:9px}
+    .settings-page__preference-row{grid-template-columns:40px minmax(0,1fr) auto;padding:8px 10px}
+}
+
+/* Settings is now a normal route; never show the old modal overlay. */
+.settings-overlay{display:none !important}
+body.settings-modal-open{overflow:auto !important}
+
+
+/* =========================================================
+   PHASE 14.1 — Settings page header refinement
+   ========================================================= */
+.settings-page {
+    padding-top: 4px;
+    padding-bottom: 28px;
+}
+
+.settings-page__topbar {
+    min-height: 58px;
+    margin-bottom: 16px;
+    padding: 0 0 14px;
+    align-items: center;
+}
+
+.settings-page__back {
+    flex: 0 0 auto;
+    min-width: 86px;
+    justify-content: center;
+    white-space: nowrap;
+    order: 2;
+    margin-left: auto;
+}
+
+.settings-page__title {
+    order: 1;
+}
+
+.settings-page__title {
+    flex: 1 1 auto;
+}
+
+.settings-page__title h1 {
+    line-height: 1.1;
+}
+
+.settings-page__title p {
+    line-height: 1.35;
+}
+
+.settings-page__section-heading {
+    margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+    .settings-page__topbar {
+        min-height: 54px;
+        gap: 10px;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+    }
+
+    .settings-page__back {
+        min-width: 78px;
+    }
+
+    .settings-page__title {
+        gap: 10px;
+    }
+
+    .settings-page__title-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        font-size: 17px;
+    }
+
+    .settings-page__title h1 {
+        font-size: 20px;
+    }
+
+    .settings-page__title p {
+        font-size: 9px;
+    }
+}

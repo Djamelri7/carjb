@@ -1,0 +1,159 @@
+/* =========================================================
+   CarCare — Theme System
+   PHASE 06 — Dark Mode & Theme Refinement
+   ========================================================= */
+
+:root {
+    color-scheme: light;
+
+    --color-primary: #087ff5;
+    --color-primary-dark: #0669cf;
+    --color-primary-soft: #e8f3ff;
+
+    --color-success: #16b968;
+    --color-success-soft: #e7f8ef;
+
+    --color-warning: #f5c400;
+    --color-warning-soft: #fff5c7;
+
+    --color-danger: #ef4444;
+    --color-danger-soft: #feecec;
+
+    --color-text: #101a3d;
+    --color-text-secondary: #61708f;
+    --color-text-muted: #8490a8;
+
+    --color-bg: #f4f9fd;
+    --color-surface: #ffffff;
+    --color-surface-soft: #eef5fb;
+    --color-surface-elevated: #ffffff;
+    --color-border: #e2eaf3;
+    --color-divider: #e7edf4;
+
+    --shadow-card: 0 8px 28px rgba(38, 73, 110, 0.08);
+    --shadow-soft: 0 4px 16px rgba(38, 73, 110, 0.06);
+    --shadow-nav: 0 14px 38px rgba(34, 65, 100, 0.14);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-primary: #1688ff;
+    --color-primary-dark: #0b72df;
+    --color-primary-soft: rgba(22, 136, 255, 0.13);
+
+    --color-success: #2ad27d;
+    --color-success-soft: rgba(42, 210, 125, 0.12);
+
+    --color-warning: #ffd12f;
+    --color-warning-soft: rgba(255, 209, 47, 0.13);
+
+    --color-danger: #ff6565;
+    --color-danger-soft: rgba(255, 101, 101, 0.13);
+
+    --color-text: #f2f7fc;
+    --color-text-secondary: #aebdce;
+    --color-text-muted: #7f91a6;
+
+    --color-bg: #07131c;
+    --color-surface: #0d202c;
+    --color-surface-soft: #142b39;
+    --color-surface-elevated: #102632;
+    --color-border: #1d3a4a;
+    --color-divider: #193443;
+
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.24);
+    --shadow-soft: 0 5px 18px rgba(0, 0, 0, 0.18);
+    --shadow-nav: 0 14px 38px rgba(0, 0, 0, 0.34);
+}
+
+html,
+body,
+.app-shell,
+.dashboard-card,
+.search-box,
+.icon-button,
+.avatar,
+.bottom-nav {
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+[data-theme="dark"] body {
+    background: var(--color-bg);
+}
+
+[data-theme="dark"] .brand__car {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .vehicle-card {
+    background:
+        linear-gradient(
+            120deg,
+            rgba(20, 43, 57, .98),
+            rgba(13, 32, 44, .98)
+        );
+}
+
+[data-theme="dark"] .vehicle-card__image {
+    mix-blend-mode: screen;
+    filter: brightness(.94) contrast(1.06);
+}
+
+[data-theme="dark"] .search-box,
+[data-theme="dark"] .icon-button,
+[data-theme="dark"] .avatar,
+[data-theme="dark"] .dashboard-card {
+    background-color: var(--color-surface);
+}
+
+[data-theme="dark"] .bottom-nav {
+    background: rgba(13, 32, 44, .92);
+    box-shadow: var(--shadow-nav);
+}
+
+[data-theme="dark"] .fab {
+    border-color: var(--color-bg);
+    box-shadow: 0 10px 25px rgba(22, 136, 255, .30);
+}
+
+[data-theme="dark"] .care-icon {
+    box-shadow: 0 7px 18px rgba(22, 136, 255, .18);
+}
+
+[data-theme="dark"] .status-badge {
+    background: var(--color-warning-soft);
+    color: var(--color-warning);
+}
+
+[data-theme="dark"] .maintenance-icon {
+    background: var(--color-surface-soft);
+}
+
+[data-theme="dark"] .health-ring {
+    background: conic-gradient(
+        var(--color-success) calc(var(--health) * 1%),
+        var(--color-surface-soft) 0
+    );
+}
+
+[data-theme="dark"] .health-ring::before {
+    background: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

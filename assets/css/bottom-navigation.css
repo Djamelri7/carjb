@@ -1,0 +1,613 @@
+/* =========================================================
+   PHASE 13 — Floating Active Bottom Navigation
+   ========================================================= */
+
+:root {
+    --nav-background: #26343d;
+    --nav-accent: #ff756c;
+    --nav-active-icon: #ffffff;
+    --nav-active-label: #ffffff;
+    --nav-height: 72px;
+    --nav-active-size: 76px;
+    --nav-animation: 200ms;
+    --bottom-nav-height: 72px;
+}
+
+.bottom-nav {
+    position: fixed;
+    z-index: 1100;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: var(--nav-height);
+    height: calc(var(--nav-height) + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: end;
+    padding: 0 6px env(safe-area-inset-bottom);
+    border: 0;
+    border-radius: 0;
+    background: color-mix(in srgb, var(--nav-background) 94%, transparent);
+    box-shadow: 0 -8px 22px rgba(0, 0, 0, .10);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.bottom-nav__item {
+    position: relative;
+    min-width: 0;
+    height: var(--nav-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    padding: 0 3px 10px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--nav-accent);
+    cursor: pointer;
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: color var(--nav-animation) ease;
+}
+
+.bottom-nav__item:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(255, 117, 108, .55);
+}
+
+.bottom-nav__active-backdrop {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: -13px;
+    width: calc(var(--nav-active-size) + 12px);
+    height: calc(var(--nav-active-size) + 12px);
+    transform: translateX(-50%) scale(.78);
+    border-radius: 50%;
+    background: var(--nav-background);
+    opacity: 0;
+    transition: opacity var(--nav-animation) ease, transform var(--nav-animation) ease;
+}
+
+.bottom-nav__icon {
+    position: relative;
+    z-index: 2;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    color: var(--nav-accent);
+    font-size: 29px;
+    line-height: 1;
+    transition:
+        width var(--nav-animation) ease,
+        height var(--nav-animation) ease,
+        transform var(--nav-animation) ease,
+        background-color var(--nav-animation) ease,
+        color var(--nav-animation) ease;
+}
+
+.bottom-nav__label {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--nav-active-label);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
+    transition:
+        opacity var(--nav-animation) ease,
+        transform var(--nav-animation) ease;
+}
+
+.bottom-nav__item:not(.is-active) .bottom-nav__label {
+    display: none;
+}
+
+.bottom-nav__item.is-active {
+    color: var(--nav-active-icon);
+}
+
+.bottom-nav__item.is-active .bottom-nav__active-backdrop {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.bottom-nav__item.is-active .bottom-nav__icon {
+    width: var(--nav-active-size);
+    height: var(--nav-active-size);
+    margin-top: -34px;
+    border-radius: 50%;
+    background: var(--nav-accent);
+    color: var(--nav-active-icon);
+    font-size: 31px;
+    box-shadow: 0 0 0 7px var(--nav-background);
+}
+
+.bottom-nav__item.is-active .bottom-nav__label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .bottom-nav {
+    background: color-mix(in srgb, #26343d 96%, transparent);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, .22);
+}
+
+@media (max-width: 600px) {
+    :root {
+        --nav-height: 68px;
+        --nav-active-size: 72px;
+    }
+
+    .bottom-nav {
+        padding-inline: 2px;
+    }
+
+    .bottom-nav__item {
+        padding-bottom: 8px;
+        gap: 4px;
+    }
+
+    .bottom-nav__icon {
+        width: 32px;
+        height: 32px;
+        font-size: 27px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 29px;
+        margin-top: -31px;
+    }
+
+    .bottom-nav__label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    :root {
+        --nav-height: 64px;
+        --nav-active-size: 68px;
+    }
+
+    .bottom-nav__icon {
+        width: 30px;
+        height: 30px;
+        font-size: 25px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        margin-top: -29px;
+        font-size: 27px;
+    }
+
+    .bottom-nav__label {
+        font-size: 13px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    :root {
+        --nav-height: 58px;
+        --nav-active-size: 62px;
+    }
+
+    .bottom-nav__item {
+        padding-bottom: 5px;
+        gap: 2px;
+    }
+
+    .bottom-nav__icon {
+        width: 27px;
+        height: 27px;
+        font-size: 23px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        margin-top: -26px;
+        font-size: 24px;
+        box-shadow: 0 0 0 6px var(--nav-background);
+    }
+
+    .bottom-nav__label {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   PHASE 13.1 — App-matched navigation + smaller icons
+   ========================================================= */
+:root {
+    --nav-background: var(--color-surface);
+}
+
+.bottom-nav {
+    background: var(--nav-background);
+}
+
+.bottom-nav__icon {
+    font-size: 24px;
+}
+
+.bottom-nav__item.is-active .bottom-nav__icon {
+    font-size: 27px;
+}
+
+[data-theme="dark"] .bottom-nav {
+    background: var(--color-surface);
+}
+
+@media (max-width: 600px) {
+    .bottom-nav__icon {
+        font-size: 23px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 380px) {
+    .bottom-nav__icon {
+        font-size: 22px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 24px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .bottom-nav__icon {
+        font-size: 21px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 23px;
+    }
+}
+
+/* =========================================================
+   PHASE 13.2 — Smaller blue active button
+   ========================================================= */
+:root {
+    --nav-active-size: 62px;
+    --nav-active-color: var(--color-primary);
+}
+
+.bottom-nav__item.is-active .bottom-nav__icon {
+    width: var(--nav-active-size);
+    height: var(--nav-active-size);
+    background: var(--nav-active-color);
+    font-size: 25px;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --nav-active-size: 60px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 24px;
+        margin-top: -26px;
+    }
+}
+
+@media (max-width: 380px) {
+    :root {
+        --nav-active-size: 56px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 22px;
+        margin-top: -24px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    :root {
+        --nav-active-size: 54px;
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        font-size: 21px;
+        margin-top: -22px;
+    }
+}
+
+/* =========================================================
+   PHASE 13.2 — App blue inactive icons + dark icon outline
+   ========================================================= */
+:root {
+    --nav-accent: var(--color-primary);
+    --nav-icon-stroke: #111827;
+}
+
+.bottom-nav__icon {
+    color: var(--color-primary);
+    -webkit-text-stroke: .7px var(--nav-icon-stroke);
+    text-shadow: none;
+}
+
+.bottom-nav__item.is-active .bottom-nav__icon {
+    color: var(--nav-active-icon);
+    -webkit-text-stroke: 0;
+}
+
+@media (max-width: 600px) {
+    .bottom-nav__icon {
+        -webkit-text-stroke: .65px var(--nav-icon-stroke);
+    }
+
+    .bottom-nav__item.is-active .bottom-nav__icon {
+        -webkit-text-stroke: 0;
+    }
+}
+
+/* PHASE 13.2 — Light mode navigation labels */
+:root {
+    --nav-active-label: #000000;
+}
+
+[data-theme="dark"] {
+    --nav-active-label: #ffffff;
+}
+
+
+/* Settings is a full application page; keep the bottom navigation out of the way. */
+.bottom-nav.is-settings-hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   PHASE 14.1 — Smooth swipe transition between active items
+   ========================================================= */
+.bottom-nav__item .bottom-nav__icon,
+.bottom-nav__item .bottom-nav__active-backdrop,
+.bottom-nav__item .bottom-nav__label {
+    will-change: transform, opacity;
+}
+
+.bottom-nav__item.is-slide-entering .bottom-nav__icon {
+    transform: translateX(var(--nav-slide-x, 0px));
+    opacity: .92;
+}
+
+.bottom-nav__item.is-slide-entering .bottom-nav__active-backdrop {
+    transform: translateX(calc(-50% + var(--nav-slide-x, 0px))) scale(1);
+}
+
+.bottom-nav__item.is-slide-entering .bottom-nav__label {
+    transform: translateX(var(--nav-slide-x, 0px)) translateY(5px);
+    opacity: 0;
+}
+
+.bottom-nav__item.is-slide-leaving .bottom-nav__icon {
+    opacity: .18;
+    transition: opacity 120ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bottom-nav__item .bottom-nav__icon,
+    .bottom-nav__item .bottom-nav__active-backdrop,
+    .bottom-nav__item .bottom-nav__label {
+        transition: none !important;
+    }
+}
+
+/* =========================================================
+   PHASE 14.2 — Reference-style moving active indicator
+   ========================================================= */
+.bottom-nav {
+    overflow: visible;
+}
+
+.bottom-nav__item {
+    z-index: 1;
+}
+
+.bottom-nav__item.is-active .bottom-nav__icon {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bottom-nav__indicator {
+    --indicator-index: 0;
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    bottom: 0;
+    width: 20%;
+    height: var(--nav-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(calc(var(--indicator-index) * 100%));
+    transition:
+        transform 240ms cubic-bezier(.22,.61,.36,1),
+        opacity 140ms ease;
+    will-change: transform;
+}
+
+.bottom-nav__indicator.is-visible {
+    opacity: 1;
+}
+
+.bottom-nav__indicator-circle {
+    width: var(--nav-active-size);
+    height: var(--nav-active-size);
+    margin-top: -34px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--nav-active-color);
+    color: var(--nav-active-icon);
+    box-shadow: 0 0 0 7px var(--nav-background);
+}
+
+.bottom-nav__indicator-icon {
+    font-size: 25px;
+    line-height: 1;
+}
+
+.bottom-nav__indicator-label {
+    max-width: 100%;
+    padding: 0 2px;
+    color: var(--nav-active-label);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bottom-nav__indicator.is-moving .bottom-nav__indicator-icon {
+    animation: bottom-nav-icon-swap 180ms ease both;
+}
+
+.bottom-nav__indicator.is-moving .bottom-nav__indicator-label {
+    animation: bottom-nav-label-swap 180ms ease both;
+}
+
+@keyframes bottom-nav-icon-swap {
+    0% { opacity: .45; transform: scale(.88); }
+    55% { opacity: 1; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bottom-nav-label-swap {
+    0% { opacity: 0; transform: translateY(5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .bottom-nav__indicator-circle {
+        width: var(--nav-active-size);
+        height: var(--nav-active-size);
+        margin-top: -26px;
+    }
+
+    .bottom-nav__indicator-icon {
+        font-size: 24px;
+    }
+
+    .bottom-nav__indicator-label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .bottom-nav__indicator-circle {
+        margin-top: -24px;
+    }
+
+    .bottom-nav__indicator-icon {
+        font-size: 22px;
+    }
+
+    .bottom-nav__indicator-label {
+        font-size: 13px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .bottom-nav__indicator-circle {
+        margin-top: -22px;
+        box-shadow: 0 0 0 6px var(--nav-background);
+    }
+
+    .bottom-nav__indicator-icon {
+        font-size: 21px;
+    }
+
+    .bottom-nav__indicator-label {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bottom-nav__indicator {
+        transition: none !important;
+    }
+
+    .bottom-nav__indicator-icon,
+    .bottom-nav__indicator-label {
+        animation: none !important;
+    }
+}
+
+/* =========================================================
+   PHASE 14.3 — Instant active-icon size change
+   The active icon must not visibly shrink/grow during navigation.
+   The indicator itself keeps the smooth horizontal movement.
+   ========================================================= */
+.bottom-nav__indicator.is-moving .bottom-nav__indicator-icon {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+.bottom-nav__item .bottom-nav__icon {
+    transition: none !important;
+}
+
+/* =========================================================
+   PHASE 14.4 — Center navigation content vertically
+   Raise the complete icon/label group without changing the
+   navigation container size or horizontal layout.
+   ========================================================= */
+.bottom-nav__item {
+    padding-bottom: 18px;
+}
+
+.bottom-nav__indicator {
+    bottom: 8px;
+}
+
+@media (max-width: 600px) {
+    .bottom-nav__item {
+        padding-bottom: 16px;
+    }
+
+    .bottom-nav__indicator {
+        bottom: 8px;
+    }
+}
+
+@media (max-width: 380px) {
+    .bottom-nav__item {
+        padding-bottom: 14px;
+    }
+
+    .bottom-nav__indicator {
+        bottom: 7px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .bottom-nav__item {
+        padding-bottom: 10px;
+    }
+
+    .bottom-nav__indicator {
+        bottom: 5px;
+    }
+}
