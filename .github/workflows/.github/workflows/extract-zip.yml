@@ -14,65 +14,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract carjb.zip
+      - name: Extract ZIP
         run: |
           set -e
 
-          echo "Searching for carjb.zip..."
-
           if [ ! -f "carjb.zip" ]; then
-            echo "ERROR: carjb.zip was not found."
+            echo "ERROR: carjb.zip not found"
             exit 1
           fi
 
-          rm -rf extracted
-          mkdir extracted
+          mkdir -p extracted
+          unzip -q carjb.zip -d extracted
 
-          unzip -q "carjb.zip" -d extracted
-
-          echo "Extracted files:"
-          find extracted -maxdepth 3 -type f | sort
-
-      - name: Move project files to repository root
-        run: |
-          set -e
+          echo "Searching for index.html..."
 
           if [ -f "extracted/index.html" ]; then
-            echo "index.html found directly in ZIP root."
-
-            cp -a extracted/. .
-
+            PROJECT_DIR="extracted"
           else
-            echo "index.html not found at ZIP root."
-
-            INDEX_PATH=$(find extracted -name "index.html" -type f | head -n 1)
+            INDEX_PATH=$(find extracted -name index.html -type f | head -n 1)
 
             if [ -z "$INDEX_PATH" ]; then
-              echo "ERROR: index.html was not found inside ZIP."
+              echo "ERROR: index.html not found"
               exit 1
             fi
 
             PROJECT_DIR=$(dirname "$INDEX_PATH")
-
-            echo "Project directory: $PROJECT_DIR"
-
-            cp -a "$PROJECT_DIR"/. .
           fi
 
-      - name: Remove temporary files
-        run: |
+          echo "Project directory: $PROJECT_DIR"
+
+          cp -a "$PROJECT_DIR"/. .
+
           rm -rf extracted
           rm -f carjb.zip
 
-      - name: Show project structure
-        run: |
-          echo "Final project structure:"
-          find . -maxdepth 3 -type f \
-            ! -path "./.git/*" \
-            ! -path "./.github/*" \
-            | sort
-
-      - name: Commit extracted project
+      - name: Commit extracted files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -80,8 +56,8 @@ jobs:
           git add .
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No changes"
           else
-            git commit -m "Extract CarCare project from ZIP"
+            git commit -m "Extract CarCare project"
             git push
           fi
