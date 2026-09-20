@@ -1,6 +1,5 @@
 {
   "appId": "com.carcare.app",
   "appName": "CarCare",
-  "webDir": ".",
-  "bundledWebRuntime": false
+  "webDir": "."
 }
